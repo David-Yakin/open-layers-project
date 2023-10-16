@@ -7,6 +7,8 @@ type MapProps = {};
 
 const OpenLayersMap: FC<MapProps> = ({}) => {
   const [mapInst, setMap] = useState<null | Map>(null);
+  const [coordinates, setCoordinates] = useState([0, 0]);
+
   const mapEl = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -14,7 +16,13 @@ const OpenLayersMap: FC<MapProps> = ({}) => {
       const map = MapModel(mapEl.current);
       setMap(map);
     }
-  }, [mapEl]);
+  }, []);
+
+  useEffect(() => {
+    if (mapInst) {
+      mapInst.on("click", () => console.log(coordinates));
+    }
+  }, [coordinates, mapInst]);
 
   return <Box sx={{ width: "250px", height: "250px" }} ref={mapEl}></Box>;
 };
