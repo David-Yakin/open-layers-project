@@ -9,7 +9,8 @@ type RefEl = string | HTMLElement | undefined;
 const MapModel = (refEl: RefEl) =>
   new Map({
     target: refEl,
-    layers: [tileLayer, vectorLayer],
+    layers: [tileLayer],
+    // layers: [tileLayer, vectorLayer],
     view: new View({
       center: fromLonLat([35, 31.5]),
       zoom: 6,
