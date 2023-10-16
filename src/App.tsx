@@ -1,7 +1,12 @@
 import "./App.css";
+import OpenLayersMap from "./maps/components/OpenLayersMap";
 
 const App = () => {
-  return <div>app works!</div>;
+  return (
+    <div>
+      <OpenLayersMap />
+    </div>
+  );
 };
 
 export default App;
