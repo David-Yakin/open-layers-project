@@ -1,10 +1,10 @@
 import "./App.css";
-import OpenLayersMap from "./maps/components/OpenLayersMap";
+import MapPage from "./features/maps/pages/MapPage";
 
 const App = () => {
   return (
     <div>
-      <OpenLayersMap />
+      <MapPage />
     </div>
   );
 };
