@@ -17,8 +17,11 @@ export const mapSlice = createSlice({
     addMap: (state, action: PayloadAction<Map>) => {
       state.map = action.payload;
     },
+    addMapAction: (state, action: PayloadAction<Map>) => {
+      state.map = action.payload;
+    },
   },
 });
 
-export const { addMap } = mapSlice.actions;
+export const { addMap, addMapAction } = mapSlice.actions;
 export const mapReducer = mapSlice.reducer;
