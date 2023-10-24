@@ -4,14 +4,14 @@ import OpenLayersMap from "../components/OpenLayersMap";
 import AttackForm, { AttackFormData } from "../components/AttackForm";
 
 const MapPage = () => {
-  const [coordinates, setCoordinates] = useState<number[]>(initialCoordinates);
+  const [coordinates, setCoordinates] = useState(initialCoordinates);
 
   const handleCoordinates = useCallback(
     (coordinatesFromMap: number[]) => setCoordinates(coordinatesFromMap),
     [coordinates]
   );
 
-  const handleSubmitAttackForm = (attackFormData: AttackFormData) => {
+  const handleAttack = (attackFormData: AttackFormData) => {
     const { coordinateX, coordinateY } = attackFormData;
     setCoordinates([coordinateX, coordinateY]);
   };
@@ -22,7 +22,7 @@ const MapPage = () => {
         coordinates={coordinates}
         onChangeCoordinates={handleCoordinates}
       />
-      <AttackForm onClick={handleSubmitAttackForm} />
+      <AttackForm onClick={handleAttack} />
     </>
   );
 };

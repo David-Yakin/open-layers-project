@@ -6,7 +6,7 @@ import OSM from "ol/source/OSM";
 import XYZ from "ol/source/XYZ";
 import { Feature } from "ol";
 import { Point } from "ol/geom";
-
+import { bombPointerStyle } from "./styles";
 export const vectorLayer = new VectorLayer({
   background: "#1a2b39",
   source: new VectorSource({
@@ -29,7 +29,7 @@ export const googleMapsLayer = new TileLayer({
 });
 
 export const pointsLayer = (coordinates: number[]) => {
-  return new VectorLayer({
+  const marker = new VectorLayer({
     source: new VectorSource({
       features: [
         new Feature({
@@ -38,4 +38,6 @@ export const pointsLayer = (coordinates: number[]) => {
       ],
     }),
   });
+  marker.setStyle(bombPointerStyle);
+  return marker;
 };

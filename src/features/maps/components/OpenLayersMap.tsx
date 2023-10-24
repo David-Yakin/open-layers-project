@@ -1,11 +1,14 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { FC, useState, useEffect, useRef, memo } from "react";
 import MapModel from "../models/MapModel";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { addMap } from "../mapSlice";
 import DisplayMode from "./displayMode/DisplayModes";
 import { LayerType } from "../types/mapTypes";
-import { pointsLayer, tileLayer } from "../helpers/layers";
+import { tileLayer } from "../helpers/layers";
+import { addAttack, onZoomOut } from "../helpers/actions";
+import ZoomOutOutlinedIcon from "@mui/icons-material/ZoomOutOutlined";
+import Fab from "@mui/material/Fab";
 
 type MapProps = {
   coordinates: number[];
@@ -13,7 +16,6 @@ type MapProps = {
 };
 
 const OpenLayersMap: FC<MapProps> = ({ coordinates, onChangeCoordinates }) => {
-  // const [marks, setMarks] = useState(null);
   const [layer, setLayer] = useState<LayerType>(tileLayer);
   const mapEl = useRef<HTMLDivElement>(null);
   const mapInst = useAppSelector((state) => state.map.map);
@@ -29,9 +31,7 @@ const OpenLayersMap: FC<MapProps> = ({ coordinates, onChangeCoordinates }) => {
   useEffect(() => {
     if (mapInst) {
       mapInst.on("click", (e) => onChangeCoordinates(e.coordinate));
-      // mapInst.on("dblclick", (e) =>
-      //   mapInst.addLayer(pointsLayer(e.coordinate))
-      // );
+      mapInst.on("dblclick", (e) => addAttack(mapInst, e.coordinate));
     }
   }, [mapInst]);
 
@@ -44,19 +44,23 @@ const OpenLayersMap: FC<MapProps> = ({ coordinates, onChangeCoordinates }) => {
   const handleChangeLayer = (layer: LayerType) => setLayer(layer);
 
   return (
-    <>
-      <Box
-        sx={{ width: "250px", height: "250px", position: "relative" }}
-        ref={mapEl}
-      >
-        <DisplayMode onClick={handleChangeLayer} />
-      </Box>
-      {coordinates && (
-        <Typography>
-          coordinates: x: {coordinates[0]} y: {coordinates[1]}
-        </Typography>
+    <Box
+      sx={{ width: "500px", height: "250px", position: "relative" }}
+      ref={mapEl}
+    >
+      {mapInst && (
+        <>
+          <DisplayMode onClick={handleChangeLayer} />
+          <Fab
+            color="primary"
+            onClick={() => onZoomOut(mapInst, coordinates)}
+            sx={{ position: "absolute", bottom: 15, left: 15, zIndex: 1000 }}
+          >
+            <ZoomOutOutlinedIcon />
+          </Fab>
+        </>
       )}
-    </>
+    </Box>
   );
 };
 
