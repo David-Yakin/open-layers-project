@@ -3,8 +3,8 @@ import { FC, useState, useEffect, useRef, memo } from "react";
 import MapModel from "../models/MapModel";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { addMap } from "../mapSlice";
-import DisplayMode from "./displayMode/DisplayModes";
-import { LayerType } from "../types/mapTypes";
+import DisplayMode from "./DisplayModes";
+import { DisplayModeType, LayerType } from "../types/mapTypes";
 import { tileLayer } from "../helpers/layers";
 import { addAttack, onZoomOut } from "../helpers/actions";
 import ZoomOutOutlinedIcon from "@mui/icons-material/ZoomOutOutlined";
@@ -16,7 +16,7 @@ type MapProps = {
 };
 
 const OpenLayersMap: FC<MapProps> = ({ coordinates, onChangeCoordinates }) => {
-  const [layer, setLayer] = useState<LayerType>(tileLayer);
+  const [layer, setLayer] = useState<DisplayModeType>("standard");
   const mapEl = useRef<HTMLDivElement>(null);
   const mapInst = useAppSelector((state) => state.map.map);
   const dispatch = useAppDispatch();
@@ -35,22 +35,24 @@ const OpenLayersMap: FC<MapProps> = ({ coordinates, onChangeCoordinates }) => {
     }
   }, [mapInst]);
 
-  useEffect(() => {
-    if (mapInst) {
-      mapInst.setLayers([layer]);
-    }
-  }, [mapInst, layer]);
+  // useEffect(() => {
+  //   if (mapInst) {
+  //     mapInst.setLayers([layer]);
+  //   }
+  // }, [mapInst, layer]);
 
-  const handleChangeLayer = (layer: LayerType) => setLayer(layer);
+  // const handleChangeLayer = (layer: LayerType) => console.log(layer);
+  // const handleChangeLayer = (layer: LayerType) => setLayer(layer);
 
   return (
     <Box
-      sx={{ width: "500px", height: "250px", position: "relative" }}
+      sx={{ width: "500px", height: "350px", position: "relative" }}
       ref={mapEl}
     >
       {mapInst && (
         <>
-          <DisplayMode onClick={handleChangeLayer} />
+          <DisplayMode />
+          {/* <DisplayMode onClick={handleChangeLayer} /> */}
           <Fab
             color="primary"
             onClick={() => onZoomOut(mapInst, coordinates)}

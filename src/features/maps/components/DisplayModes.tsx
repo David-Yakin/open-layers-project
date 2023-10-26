@@ -1,35 +1,42 @@
 import { FC, useState } from "react";
-import { LayerType } from "../../types/mapTypes";
+import { DisplayModeType } from "../types/mapTypes";
 import MapTwoToneIcon from "@mui/icons-material/MapTwoTone";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import SatelliteAltOutlinedIcon from "@mui/icons-material/SatelliteAltOutlined";
 import DirectionsCarOutlinedIcon from "@mui/icons-material/DirectionsCarOutlined";
-import { googleMapsLayer, tileLayer, vectorLayer } from "../../helpers/layers";
 import { SpeedDial, SpeedDialAction } from "@mui/material";
 
-type DisplayModeProps = {
-  onClick: (layer: LayerType) => void;
-};
+import ContrastOutlinedIcon from "@mui/icons-material/ContrastOutlined";
+import { useAppDispatch } from "../../../store/hooks";
+import { turnOnLayer } from "../mapSlice";
+import DisplayIconInterface from "../interfaces/DisplayIconInterface";
 
-const DisplayMode: FC<DisplayModeProps> = ({ onClick }) => {
+type DisplayModeProps = {};
+
+const DisplayMode: FC<DisplayModeProps> = () => {
   const [isOpen, setOpenStatus] = useState(false);
-
-  const handleClickDisplayIcon = (layer: LayerType) => {
-    onClick(layer);
+  const dispatch = useAppDispatch();
+  const handleClickDisplayIcon = (layer: DisplayModeType) => {
     setOpenStatus(false);
+    dispatch(turnOnLayer(layer));
   };
 
-  const icons = [
-    { icon: <LayersOutlinedIcon />, name: "geographic", layer: vectorLayer },
+  const icons: DisplayIconInterface[] = [
+    {
+      icon: <LayersOutlinedIcon />,
+      name: "terrain",
+    },
     {
       icon: <SatelliteAltOutlinedIcon />,
-      name: "Satellite",
-      layer: googleMapsLayer,
+      name: "google",
     },
     {
       icon: <DirectionsCarOutlinedIcon />,
-      name: "Open Street Map",
-      layer: tileLayer,
+      name: "standard",
+    },
+    {
+      icon: <ContrastOutlinedIcon />,
+      name: "B&W",
     },
   ];
 
@@ -45,13 +52,13 @@ const DisplayMode: FC<DisplayModeProps> = ({ onClick }) => {
       {icons &&
         !!icons.length &&
         icons.map((icon, i) => {
-          const { icon: displayIcon, name, layer } = icon;
+          const { icon: displayIcon, name } = icon;
           return (
             <SpeedDialAction
               key={i}
               icon={displayIcon}
               tooltipTitle={name}
-              onClick={() => handleClickDisplayIcon(layer)}
+              onClick={() => handleClickDisplayIcon(name)}
             />
           );
         })}

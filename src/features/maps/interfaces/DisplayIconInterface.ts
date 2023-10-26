@@ -1,10 +1,9 @@
 import { ReactNode } from "react";
-import { LayerType } from "../types/mapTypes";
+import { DisplayModeType } from "../types/mapTypes";
 
 interface DisplayIconInterface {
   icon: ReactNode;
-  name: string;
-  layer: LayerType;
+  name: DisplayModeType;
 }
 
 export default DisplayIconInterface;

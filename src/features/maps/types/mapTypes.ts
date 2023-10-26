@@ -9,3 +9,5 @@ export type LayerType =
   | VectorLayer<VectorSource<Geometry>>
   | TileLayer<OSM>
   | TileLayer<XYZ>;
+
+export type DisplayModeType = "standard" | "google" | "terrain" | "B&W";
