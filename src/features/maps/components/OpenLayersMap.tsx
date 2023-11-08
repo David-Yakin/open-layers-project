@@ -12,7 +12,7 @@ type MapProps = {
   width?: string;
 };
 
-const OpenLayersMap: FC<MapProps> = ({ height = "75vh", width = "100%" }) => {
+const OpenLayersMap: FC<MapProps> = ({ height = "80vh", width = "100%" }) => {
   const mapEl = useRef<HTMLDivElement>(null);
   const mapInst = useAppSelector((state) => state.map.map);
   const coordinates = useAppSelector((state) => state.map.coordinates);
@@ -26,7 +26,14 @@ const OpenLayersMap: FC<MapProps> = ({ height = "75vh", width = "100%" }) => {
   }, []);
 
   return (
-    <Box width={width} height={height} position="relative" ref={mapEl}>
+    <Box
+      width={width}
+      height={height}
+      top={0}
+      left={0}
+      ref={mapEl}
+      position="relative"
+    >
       {mapInst && (
         <>
           <DisplayMode />

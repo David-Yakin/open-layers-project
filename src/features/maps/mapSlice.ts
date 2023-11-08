@@ -30,10 +30,6 @@ export const mapSlice = createSlice({
     zoomOut: (state, action: PayloadAction<number[]>) => {
       const map = state.map;
       if (!map) return;
-      const zoom = map.getView().getZoom();
-      console.log(zoom);
-
-      if (zoom === 6) return;
 
       map.setView(
         new View({

@@ -27,8 +27,9 @@ const AttackForm: FC<AttackFormProps> = () => {
   };
 
   return (
-    <Box component="form" noValidate autoComplete="off">
+    <Box component="form" noValidate autoComplete="off" p="20px">
       <TextField
+        sx={{ mb: 2 }}
         size="small"
         id="outlined-basic-x"
         label="coordinate X"
@@ -41,6 +42,7 @@ const AttackForm: FC<AttackFormProps> = () => {
         }
       />
       <TextField
+        sx={{ mb: 2 }}
         size="small"
         id="outlined-basic-y"
         label="coordinate Y"
