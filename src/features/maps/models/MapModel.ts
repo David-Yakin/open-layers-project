@@ -7,11 +7,12 @@ import {
   humanitarianLayer,
   blackAndWight,
 } from "../helpers/layers";
+import { addAttack } from "../helpers/actions";
 
 type RefEl = string | HTMLElement | undefined;
 
-const MapModel = (refEl: RefEl) =>
-  new Map({
+const MapModel = (refEl: RefEl) => {
+  const map = new Map({
     target: refEl,
     layers: [tileLayer, googleMapsLayer, humanitarianLayer, blackAndWight],
     view: new View({
@@ -20,5 +21,9 @@ const MapModel = (refEl: RefEl) =>
     }),
     controls: [],
   });
+  map.on("dblclick", (e) => addAttack(map, e.coordinate));
+  map.on("click", (e) => console.log(e.coordinate));
+  return map;
+};
 
 export default MapModel;

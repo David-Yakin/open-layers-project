@@ -1,29 +1,14 @@
-import { useState, useCallback } from "react";
-import { initialCoordinates } from "../helpers/initialData";
+import { Box } from "@mui/material";
+import PageHeader from "../../components/PageHeader";
 import OpenLayersMap from "../components/OpenLayersMap";
-import AttackForm, { AttackFormData } from "../components/AttackForm";
 
 const MapPage = () => {
-  const [coordinates, setCoordinates] = useState(initialCoordinates);
-
-  const handleCoordinates = useCallback(
-    (coordinatesFromMap: number[]) => setCoordinates(coordinatesFromMap),
-    [coordinates]
-  );
-
-  const handleAttack = (attackFormData: AttackFormData) => {
-    const { coordinateX, coordinateY } = attackFormData;
-    setCoordinates([coordinateX, coordinateY]);
-  };
-
   return (
-    <>
-      <OpenLayersMap
-        coordinates={coordinates}
-        onChangeCoordinates={handleCoordinates}
-      />
-      <AttackForm onClick={handleAttack} />
-    </>
+    <Box p="20px">
+      <PageHeader title="Map Page" subtitle="This is the main map page" />
+
+      <OpenLayersMap />
+    </Box>
   );
 };
 

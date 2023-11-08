@@ -1,6 +1,4 @@
-export const initialCoordinates = [35, 31.5];
-
 export const initialAttackFormData = {
-  coordinateX: 35,
-  coordinateY: 31.5,
+  coordinateX: 3840914.6626748466,
+  coordinateY: 3702941.919260737,
 };

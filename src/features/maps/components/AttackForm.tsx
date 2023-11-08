@@ -1,19 +1,19 @@
 import { Box, TextField, Button } from "@mui/material";
 import { FC, useState } from "react";
 import { initialAttackFormData } from "../helpers/initialData";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { addAttack } from "../helpers/actions";
+import { onChangeCoordinates } from "../mapSlice";
 
-type AttackFormProps = {
-  onClick: (FormInputs: AttackFormData) => void;
-};
+type AttackFormProps = {};
 
 export interface AttackFormData {
   coordinateX: number;
   coordinateY: number;
 }
 
-const AttackForm: FC<AttackFormProps> = ({ onClick }) => {
+const AttackForm: FC<AttackFormProps> = () => {
+  const dispatch = useAppDispatch();
   const mapInst = useAppSelector((state) => state.map.map);
   const [mapFormData, setData] = useState<AttackFormData>(
     initialAttackFormData
@@ -21,7 +21,7 @@ const AttackForm: FC<AttackFormProps> = ({ onClick }) => {
 
   const handleClick = (coordinates: number[]) => {
     if (mapInst) {
-      onClick(mapFormData);
+      dispatch(onChangeCoordinates(coordinates));
       addAttack(mapInst, coordinates);
     }
   };

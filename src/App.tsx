@@ -1,11 +1,13 @@
-import "./App.css";
-import MapPage from "./features/maps/pages/MapPage";
-
+import Layout from "./features/layout/Layout";
+import { Box } from "@mui/material";
+import Router from "./features/router/Router";
 const App = () => {
   return (
-    <div>
-      <MapPage />
-    </div>
+    <Box sx={{ display: "flex" }}>
+      <Layout>
+        <Router />
+      </Layout>
+    </Box>
   );
 };
 

@@ -11,7 +11,7 @@ export const tileLayer: TileLayer<OSM> = new TileLayer({
   source: new OSM(),
   visible: true,
   properties: {
-    tileLayer: "standard",
+    title: "standard",
   },
 });
 
@@ -21,7 +21,7 @@ export const googleMapsLayer = new TileLayer({
   }),
   visible: false,
   properties: {
-    tileLayer: "google",
+    title: "google",
   },
 });
 
@@ -31,7 +31,7 @@ export const blackAndWight = new TileLayer({
   }),
   visible: false,
   properties: {
-    tileLayer: "B&W",
+    title: "B&W",
   },
 });
 
@@ -41,7 +41,7 @@ export const humanitarianLayer = new TileLayer({
   }),
   visible: false,
   properties: {
-    tileLayer: "terrain",
+    title: "terrain",
   },
 });
 
