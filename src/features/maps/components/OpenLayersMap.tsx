@@ -12,7 +12,7 @@ type MapProps = {
   width?: string;
 };
 
-const OpenLayersMap: FC<MapProps> = ({ height = "80vh", width = "100%" }) => {
+const OpenLayersMap: FC<MapProps> = ({ height = "75vh", width = "100%" }) => {
   const mapEl = useRef<HTMLDivElement>(null);
   const mapInst = useAppSelector((state) => state.map.map);
   const coordinates = useAppSelector((state) => state.map.coordinates);
@@ -23,6 +23,7 @@ const OpenLayersMap: FC<MapProps> = ({ height = "80vh", width = "100%" }) => {
       const map = MapModel(mapEl.current);
       dispatch(addMap(map));
     }
+    if (mapEl.current && mapInst) mapInst.setTarget(mapEl.current);
   }, []);
 
   return (

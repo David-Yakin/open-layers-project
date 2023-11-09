@@ -22,7 +22,6 @@ const MapModel = (refEl: RefEl) => {
     controls: [],
   });
   map.on("dblclick", (e) => addAttack(map, e.coordinate));
-  map.on("click", (e) => console.log(e.coordinate));
   return map;
 };
 

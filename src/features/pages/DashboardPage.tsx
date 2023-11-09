@@ -15,7 +15,7 @@ const DashboardPage = () => {
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="80vh"
+        gridAutoRows="75vh"
         gap="20px"
       >
         <Box

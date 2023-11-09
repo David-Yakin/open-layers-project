@@ -39,7 +39,7 @@ export const mapSlice = createSlice({
       );
     },
 
-    turnOnLayer: (state, action: PayloadAction<DisplayModeType>) => {
+    changeDisplay: (state, action: PayloadAction<DisplayModeType>) => {
       state.map?.getAllLayers().forEach((layer) => {
         layer.setVisible(
           layer.get("title") === action.payload ||
@@ -53,7 +53,7 @@ export const mapSlice = createSlice({
 export const {
   addMap,
   addMapAction,
-  turnOnLayer,
+  changeDisplay,
   onChangeCoordinates,
   zoomOut,
 } = mapSlice.actions;

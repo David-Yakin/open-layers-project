@@ -6,7 +6,7 @@ import SatelliteAltOutlinedIcon from "@mui/icons-material/SatelliteAltOutlined";
 import DirectionsCarOutlinedIcon from "@mui/icons-material/DirectionsCarOutlined";
 import { SpeedDial, SpeedDialAction } from "@mui/material";
 import { useAppDispatch } from "../../../store/hooks";
-import { turnOnLayer } from "../mapSlice";
+import { changeDisplay } from "../mapSlice";
 import DisplayIconInterface from "../interfaces/DisplayIconInterface";
 
 type DisplayModeProps = {};
@@ -17,7 +17,7 @@ const DisplayMode: FC<DisplayModeProps> = () => {
 
   const handleClickDisplayIcon = (layer: DisplayModeType) => {
     setOpenStatus(false);
-    dispatch(turnOnLayer(layer));
+    dispatch(changeDisplay(layer));
   };
 
   const icons: DisplayIconInterface[] = [
