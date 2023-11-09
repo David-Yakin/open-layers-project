@@ -54,6 +54,11 @@ export const pointsLayer = (coordinates: number[]) => {
         }),
       ],
     }),
+    properties: {
+      title: "attack",
+      createdAt: new Date(),
+      coordinates,
+    },
   });
   marker.setStyle(bombPointerStyle);
   return marker;

@@ -21,22 +21,18 @@ export const mapSlice = createSlice({
     addMap: (state, action: PayloadAction<Map>) => {
       state.map = action.payload;
     },
-    addMapAction: (state, action: PayloadAction<Map>) => {
-      state.map = action.payload;
-    },
     onChangeCoordinates: (state, action: PayloadAction<number[]>) => {
       state.coordinates = action.payload;
     },
     zoomOut: (state, action: PayloadAction<number[]>) => {
       const map = state.map;
-      if (!map) return;
-
-      map.setView(
-        new View({
-          center: action.payload,
-          zoom: 6,
-        })
-      );
+      map &&
+        map.setView(
+          new View({
+            center: action.payload,
+            zoom: 6,
+          })
+        );
     },
 
     changeDisplay: (state, action: PayloadAction<DisplayModeType>) => {
@@ -50,11 +46,6 @@ export const mapSlice = createSlice({
   },
 });
 
-export const {
-  addMap,
-  addMapAction,
-  changeDisplay,
-  onChangeCoordinates,
-  zoomOut,
-} = mapSlice.actions;
+export const { addMap, changeDisplay, onChangeCoordinates, zoomOut } =
+  mapSlice.actions;
 export const mapReducer = mapSlice.reducer;
