@@ -39,7 +39,7 @@ export const mapSlice = createSlice({
       state.map?.getAllLayers().forEach((layer) => {
         layer.setVisible(
           layer.get("title") === action.payload ||
-            layer.get("title") === undefined
+            layer.get("title") === "attack"
         );
       });
     },
