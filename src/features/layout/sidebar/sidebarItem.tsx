@@ -1,8 +1,8 @@
 import { Dispatch, FC, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import { MenuItem } from "react-pro-sidebar";
-import { Typography, useTheme } from "@mui/material";
-import { tokens } from "../../theme/ThemeProvider";
+import { Typography } from "@mui/material";
+import { useTheme } from "../../theme/ThemeProvider";
 
 type SideItemProps = {
   title: string;
@@ -19,8 +19,7 @@ const SideItem: FC<SideItemProps> = ({
   selected,
   setSelected,
 }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  const { colors } = useTheme();
 
   return (
     <MenuItem

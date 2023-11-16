@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Sidebar as ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 // import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
@@ -13,12 +13,11 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import { tokens } from "../../theme/ThemeProvider";
+import { useTheme } from "../../theme/ThemeProvider";
 import SideItem from "./sidebarItem";
 
 const Sidebar = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  const { colors } = useTheme();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
 

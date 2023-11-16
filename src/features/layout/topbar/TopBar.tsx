@@ -1,5 +1,5 @@
-import { Box, IconButton, useTheme as muiUseTheme } from "@mui/material";
-import { tokens } from "../../theme/ThemeProvider";
+import { Box, IconButton } from "@mui/material";
+import { useTheme } from "../../theme/ThemeProvider";
 import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -7,12 +7,9 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
-import { useTheme } from "../../theme/ThemeProvider";
 
 const Topbar = () => {
-  const theme = muiUseTheme();
-  const colors = tokens(theme.palette.mode);
-  const toggleTheme = useTheme();
+  const { toggleThemeMode, colors, mode } = useTheme();
 
   return (
     <Box display="flex" justifyContent="space-between" p={2} flexGrow={0}>
@@ -28,8 +25,8 @@ const Topbar = () => {
       </Box>
 
       <Box display="flex">
-        <IconButton onClick={toggleTheme}>
-          {theme.palette.mode === "dark" ? (
+        <IconButton onClick={toggleThemeMode}>
+          {mode === "dark" ? (
             <DarkModeOutlinedIcon />
           ) : (
             <LightModeOutlinedIcon />

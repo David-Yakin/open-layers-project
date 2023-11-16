@@ -5,21 +5,13 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import { tokens } from "../theme/ThemeProvider";
+import { Box, List, ListItem, ListItemText, Typography } from "@mui/material";
+import { useTheme } from "../theme/ThemeProvider";
 import PageHeader from "../components/PageHeader";
 import { DateSelectArg, EventApi, EventClickArg } from "fullcalendar/index.js";
 
 const Calendar = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  const { colors } = useTheme();
   const [currentEvents, setCurrentEvents] = useState<EventApi[]>([]);
 
   const handleDateClick = (selected: DateSelectArg) => {

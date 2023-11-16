@@ -1,12 +1,11 @@
-import { Box, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import PageHeader from "../components/PageHeader";
-import { tokens } from "../theme/ThemeProvider";
+import { useTheme } from "../theme/ThemeProvider";
 import OpenLayersMap from "../maps/components/OpenLayersMap";
 import AttackForm from "../maps/components/AttackForm";
 
 const DashboardPage = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  const { colors } = useTheme();
 
   return (
     <Box m="20px">

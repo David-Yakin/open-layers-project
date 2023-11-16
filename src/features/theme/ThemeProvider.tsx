@@ -10,17 +10,14 @@ import {
 import { darkConfig, lightConfig } from "./themeConfig";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
+import ColorInterface from "./ColorInterface";
 
 type ModeType = "dark" | "light";
-
-export const tokens = (mode: ModeType) => ({
-  ...(mode === "dark" ? darkConfig : lightConfig),
-});
 
 const fontFamily = ["Roboto", "sans-serif"].join(",");
 
 export const themeSettings = (mode: ModeType) => {
-  const colors = tokens(mode);
+  const colors = mode === "dark" ? darkConfig : lightConfig;
   return {
     palette: {
       mode,
@@ -71,7 +68,11 @@ export const themeSettings = (mode: ModeType) => {
   };
 };
 
-type ContextValue = () => void;
+type ContextValue = {
+  colors: ColorInterface;
+  toggleThemeMode: () => void;
+  mode: ModeType;
+};
 
 const ThemeContext = createContext<null | ContextValue>(null);
 const { Provider } = ThemeContext;
@@ -90,8 +91,13 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
+  const colors = useMemo(
+    () => (mode === "dark" ? darkConfig : lightConfig),
+    [mode]
+  );
+
   return (
-    <Provider value={toggleThemeMode}>
+    <Provider value={{ toggleThemeMode, colors, mode }}>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         {children}
